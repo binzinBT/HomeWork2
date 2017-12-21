@@ -17,5 +17,6 @@ Room.prototype.getIdRoom = function () {
 };
 
 
+
 //var room = new Room("Клад");
 

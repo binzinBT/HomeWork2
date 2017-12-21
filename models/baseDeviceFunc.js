@@ -87,14 +87,14 @@ Volume.prototype.volumeUp = function () {
   if ( this._curVol < this._maxVol ) {
     this._curVol++;
   }
-}
+};
 
 Volume.prototype.volumeDown = function () {
   if ( this._curVol > 0 ) {
     this._curVol--;
   }
-}
+};
 
 Volume.prototype.volumeMute = function () {
   this._curVol = 0;
-}
+};

@@ -10,6 +10,15 @@ var breadMakerList = [
     "Крендель"
 ];
 
+var tvProgramsList = [
+  "Интер",
+  "1+1",
+  "АйСиТиВи",
+  "СТБ",
+  "ШмеТБ"
+];
+
+
 var fmStation = [
     "Хит ФМ",
     "Сит ФМ",

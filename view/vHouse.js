@@ -2,11 +2,12 @@
 function  ViewHouse (house, rootElement) {
   this._house = house;
   this._rootElement = rootElement;
-  //this._state = document.createElement("div");
 }
 
 ViewHouse.prototype.render = function () {
   var self = this;
+
+  var _indexNextRoom = 3;
   var house = document.createElement("div");
   house.className = "house";
   house.setAttribute("id", "houseNew");
@@ -18,6 +19,7 @@ ViewHouse.prototype.render = function () {
   npv.setAttribute("id", "npv");
   npv.innerHTML = "SMART HOUSE v 0.1";
 
+  // batton Add Room
   var addBtn = document.createElement("a");
   addBtn.type = "a";
   addBtn.innerHTML = "+ КОМНАТА";
@@ -25,17 +27,15 @@ ViewHouse.prototype.render = function () {
   addBtn.addEventListener("click", function () {
     var addR = prompt("Введите название комнаты", "Например гостинная");
     if ((addR !="") && (addR != null)) {
-      var addNewRoom = new Room( addR, self._house._listRoom.length );
-      var addNewViewRoom = new ViewRoom(addNewRoom, document.getElementById("houseNew"));
+      var addNewRoom = new Room( addR, _indexNextRoom++ );
+      var addNewViewRoom = new ViewRoom( addNewRoom, document.getElementById("houseNew") );
       addNewViewRoom.render();
       self._house.addRoom(addNewViewRoom);
     }
-
-
   });
 
-  cPanel.appendChild(addBtn);
-  cPanel.appendChild(npv);
-  house.appendChild(cPanel);
+  cPanel.appendChild( addBtn );
+  cPanel.appendChild( npv );
+  house.appendChild( cPanel );
   this._rootElement.appendChild(house);
 };

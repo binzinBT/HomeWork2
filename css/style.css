@@ -4,25 +4,45 @@ body {
   background-color: #cecfd0;
 }
 #root {
-  padding: 10px;
+  padding: 6px;
 }
 
 .house {
   width: 100%;
-  min-width: 800px;
+  min-width: 222px;
   background: #2980b9;
   border-radius: 6px;
   border: 2px solid #2980b9;
   padding-bottom: 20px;
+
 }
 
 .room {
- /* height: 190px;*/
-  min-width: 800px;
+  min-width: 204px;
   background: #f7f7f7;
-  margin: 4px 4px;
+  margin: 10px 4px;
   border: 2px solid #f1c40f;
-  display: block;
+  border-radius: 5px;
+  padding: 3px 2px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.unitDevice {
+  min-width: 200px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+.device {
+  width: 200px;
+  height: 280px;
+  border: 2px solid #96b4c7;
+  border-radius: 5px;
+  margin: 1px;
+  display: inline-block;
+  text-align: center;
 }
 
 .cPanel {
@@ -30,16 +50,19 @@ body {
 }
 
 .cPanelRoom {
-  height: 100%;
-  min-height: 190px;
+  min-height: 280px;
   width:  200px;
-  border-right: 2px solid #2980b9;
+  border-radius: 5px;
+  border: 2px solid #bda2c7;
   display: inline-table;
+  background-color: #2980b930;
+  margin: 1px;
+  padding: 1px;
 
 }
 
 #npv {
-  margin: 3px 3px 0px 0px;
+  margin: 3px 0px;
   display: inline-block;
   color: #e8e8e8;
   font-size: 0.9em;
@@ -48,7 +71,7 @@ body {
 }
 
 #nrp {
-  margin: 0px;
+ /* margin: 0px;*/
   text-transform: uppercase;
   float: right;
   padding: 3px;
@@ -62,6 +85,10 @@ body {
 .delRoomDiv{
   display: table-footer-group;
 }
+.delIllumDiv{
+  display: inline;
+}
+
 
 a.addRoom {
   margin: 7px 5px;
@@ -77,8 +104,7 @@ a.addRoom {
 a.addRoom:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
 a.addRoom:active { background: rgb(152,15,0); } /* при нажатии */
 
-a.delRoom {
-  margin: 1px 1px;
+a.delElem {
   color: #fff;
   text-decoration: none;
   user-select: none;
@@ -86,40 +112,58 @@ a.delRoom {
   padding: 0.3em 0em;
   outline: none;
   display: block;
-  text-align: center;}
-a.delRoom:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
-a.delRoom:active { background: rgb(152,15,0); } /* при нажатии */
+  text-align: center;
+  border-radius: 0px 0px 3px 3px;
+}
+
+a.delElem:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
+a.delElem:active { background: rgb(152,15,0); } /* при нажатии */
 
 .btn {
   border-radius: 5px;
   background: #fff;
+  margin: 2px;
+  padding-top: 4px;
+  width: 194px;
+  display: block;
 }
 
-.device {
-  width: 200px;
-  height: 190px;
-  background-color: #2980b9;
-  margin: 0px 1px;
-  display: inline-block;
+.btnPow {
+  border-radius: 5px;
+  background: #fff;
+  margin: 4px;
+  padding-top: 4px;
 }
-input {
-  padding: 10px;
-  font-size: 30px;
-  border: 10px solid rgba(255, 255, 255, 0.5);
-  -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25) inset, 0 2px 10px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25) inset, 0 2px 10px rgba(0, 0, 0, 0.25);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25) inset, 0 2px 10px rgba(0, 0, 0, 0.25);
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.5);
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  outline: none;
-  color: #333;
-  width: 50%;
-  position: absolute;
-  left: 25%;
-  top: 35%;
+
+.slColor {
+  height: 20px;
+  width: 0px;
+  background: #f1c40f;
+  margin-left: 13.5px;
+  margin-bottom: -10px;
+  margin-top: 4px;
 }
+.sliderLoad {
+  width: 180px;
+  margin-left: 10px;
+  margin-bottom: 7px;
+}
+.divSlider {
+  border: solid #bdc3c7;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 0px;
+}
+.divBright {
+  margin-top: 3px;
+  color: #9b59b6;
+  font-weight: 900;
+}
+.imgLamp {
+  margin: 0px 72px;
+  margin-bottom: 3px;
+  display: block;
+}
+
+
 

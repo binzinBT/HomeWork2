@@ -15,7 +15,21 @@ House.prototype.removeRoom = function (nameRoom) {
       break;
     }
   }
-
 };
 
+House.prototype.removeDevice = function (idRoom, idDevice) {
+  for (var i = 0; i < this._listRoom.length; i++){
+    if (this._listRoom[i]._room._id == idRoom){
+      for (var j = 0; j < this._listRoom[i]._room._listDevice.length; j++){
+        if (this._listRoom[i]._room._listDevice[j]._id == idDevice){
+          this._listRoom[i]._room._listDevice.splice(j, 1);
+          break;
+        }
+      }
+      break;
+    }
+    alert("i = " + i);
+  }
+
+};
 

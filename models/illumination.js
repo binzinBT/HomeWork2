@@ -5,11 +5,12 @@ function Illumination( name, power, load) {
   this._load = load;
 }
 
-Illumination.prototype.powerOn = function() {
+
+Illumination.prototype.on = function() {
   this._power.powerOn();
 };
 
-Illumination.prototype.powerOff = function () {
+Illumination.prototype.off = function () {
   this._power.powerOff();
 };
 
