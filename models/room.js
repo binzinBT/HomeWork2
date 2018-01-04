@@ -3,7 +3,6 @@ function Room ( name, id ) {
   this._name = name;
   this._id = id;
   this._listDevice = [];
-
 }
 
 Room.prototype.addDevice = function( device ) {
@@ -15,8 +14,3 @@ Room.prototype.getNameRoom = function () {
 Room.prototype.getIdRoom = function () {
   return this._id;
 };
-
-
-
-//var room = new Room("Клад");
-

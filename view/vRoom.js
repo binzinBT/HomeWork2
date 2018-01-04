@@ -1,18 +1,25 @@
 "use strict";
 
-function ViewRoom( room, rootElement) {
+function ViewRoom( room, rootId) {
   this._room = room;
-  this._rootElement = rootElement;
+  this._rootId = rootId;
 }
 
 ViewRoom.prototype.render = function () {
   var self = this;
-  var _indexDevNext = 2;
-  var idUnitDevice = self._room._id * 100;
+  //  idUnitDevice var for unit device in room
+  var idUnitDevice = this._room.getIdRoom() * 100;
+
+  // _indexDevNext var for index next device;
+  if (idUnitDevice == 100) {
+    var _indexDevNext = 4;
+  } else {
+    var _indexDevNext = 1;
+  }
 
   var room = document.createElement("div");
   room.className = "room";
-  room.setAttribute("id", this._room._id);
+  room.setAttribute("id", this._room.getIdRoom());
 
 
   var cPanelRoom = document.createElement("div");
@@ -27,7 +34,64 @@ ViewRoom.prototype.render = function () {
   nameDiv.appendChild(nameR);
   cPanelRoom.appendChild(nameDiv);
 
+  var unitDevice = document.createElement("div");
+  unitDevice.className = "unitDevice";
+  unitDevice.setAttribute("id", idUnitDevice);
 
+  // Button add illumination
+  var illuminBtn = document.createElement("button");
+  illuminBtn.innerHTML = `<img src="./img/lamp.png" >`;
+  illuminBtn.className = "btn";
+  illuminBtn.addEventListener("click", function () {
+    var msg = prompt("Введите название освещения", "главное");
+    if ((msg != "") && (msg != null)){
+      var load = new DeviceLoad(0, 100);
+      var idDevise = idUnitDevice + _indexDevNext++;
+      var  illumDev = new Illumination(msg, load);
+      var viewIllumDev = new ViewIllumination(illumDev, idDevise, idUnitDevice);
+      self._room.addDevice(viewIllumDev);
+      viewIllumDev.render();
+    }
+  });
+  cPanelRoom.appendChild(illuminBtn);
+
+  //Button add TV
+  var tvBtn = document.createElement("button");
+  tvBtn.innerHTML = `<img src="./img/tv48.png" >`;
+  tvBtn.className = "btn";
+  tvBtn.addEventListener("click", function () {
+    var msg = prompt("Введите название TV", "СОНЯ");
+    if ((msg != "") && (msg != null)){
+      var programs = new Programs(tvProgramsList);
+      var volume = new Volume(100);
+      var idDevise = idUnitDevice + _indexDevNext++;
+      var tvDev = new Tv(msg, programs, volume);
+      var viewTvDev = new ViewTv(tvDev, idDevise, idUnitDevice);
+      self._room.addDevice(viewTvDev);
+      viewTvDev.render();
+    }
+  });
+  cPanelRoom.appendChild(tvBtn);
+
+  //Button add Radio
+  var mp3Btn = document.createElement("button");
+  mp3Btn.innerHTML = `<img src="./img/radio48.png" >`;
+  mp3Btn.className = "btn";
+  mp3Btn.addEventListener("click", function () {
+    var msg = prompt("Введите название радио", "МОЁ радио");
+    if ((msg != "") && (msg != null)){
+      var programs = new Programs(fmStation);
+      var volume = new Volume(100);
+      var idDevise = idUnitDevice + _indexDevNext++;
+      var radioDev = new Radio(msg, programs, volume);
+      var viewRadioDev = new ViewRadio(radioDev, idDevise, idUnitDevice);
+      self._room.addDevice(viewRadioDev);
+      viewRadioDev.render();
+    }
+  });
+  cPanelRoom.appendChild(mp3Btn);
+
+  //button remove room
   var delRoomDiv = document.createElement("div");
   delRoomDiv.className = "delRoomDiv";
 
@@ -46,66 +110,7 @@ ViewRoom.prototype.render = function () {
   delRoomDiv.appendChild(delRoomBtn);
   cPanelRoom.appendChild(delRoomDiv);
 
-  var unitDevice = document.createElement("div");
-  unitDevice.className = "unitDevice";
-  unitDevice.setAttribute("id", idUnitDevice);
-
-  // Button create illumination
-  var illuminBtn = document.createElement("button");
-  illuminBtn.innerHTML = `<img src="./img/lamp.png" >`;
-  illuminBtn.className = "btn";
-  illuminBtn.addEventListener("click", function () {
-    var msg = prompt("Введите название освещения", "главное");
-    if ((msg != "") && (msg != null)){
-      var power = new Power();
-      var load = new DeviceLoad(0, 100);
-      var idDevise = idUnitDevice + _indexDevNext++;
-      var  illumDev = new Illumination(msg, power, load);
-      var viewIllumDev = new ViewIllumination(illumDev, idDevise, unitDevice);
-      self._room.addDevice(viewIllumDev);
-      viewIllumDev.render();
-    }
-  });
-  cPanelRoom.appendChild(illuminBtn);
-
-  //Button TV
-  var tvBtn = document.createElement("button");
-  tvBtn.innerHTML = `<img src="./img/tv48.png" >`;
-  tvBtn.className = "btn";
-  tvBtn.addEventListener("click", function () {
-    var msg = prompt("Введите название TV", "СОНЯ");
-    if ((msg != "") && (msg != null)){
-      var power = new Power();
-      var programs = new Programs(tvProgramsList);
-      var volume = new Volume(100);
-      var idDevise = idUnitDevice + _indexDevNext++;
-      var tvDev = new Tv(msg, power, programs, volume);
-      var viewTvDev = new ViewTv(tvDev, idDevise, unitDevice);
-      self._room.addDevice(viewTvDev);
-      viewTvDev.render();
-    }
-  });
-  cPanelRoom.appendChild(tvBtn);
-
-  //Button TV
-  var mp3Btn = document.createElement("button");
-  mp3Btn.innerHTML = `<img src="./img/radio48.png" >`;
-  mp3Btn.className = "btn";
-  mp3Btn.addEventListener("click", function () {
-    var msg = prompt("Введите название TV", "СОНЯ");
-    if ((msg != "") && (msg != null)){
-      var power = new Power();
-      var load = new DeviceLoad(0, 100);
-      var idDevise = idUnitDevice + _indexDevNext++;
-      var  illumDev = new Illumination(msg, power, load);
-      var viewIllumDev = new ViewIllumination(illumDev, idDevise, unitDevice);
-      self._room.addDevice(viewIllumDev);
-      viewIllumDev.render();
-    }
-  });
-  cPanelRoom.appendChild(mp3Btn);
-
   room.appendChild(cPanelRoom);
   room.appendChild(unitDevice);
-  this._rootElement.appendChild(room);
+  document.getElementById(this._rootId).appendChild(room);
 };

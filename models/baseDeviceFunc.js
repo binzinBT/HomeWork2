@@ -16,7 +16,6 @@ Power.prototype.getPowerStatus = function() {
   return this._powerStatus;
 };
 
-
 // Нагрузка на устройство
 function DeviceLoad ( minLoad, maxLoad ) {
   this._minLoad = Insp.checkNum( minLoad );
@@ -52,11 +51,11 @@ DeviceLoad.prototype.loadDeviceDecrease = function() {
 // Список программ в устройстве
 function Programs ( arr ) {
   this._currentProgramIndex = 0;
-  this._Programs = arr;
+  this._listPrograms = arr;
 }
 
 Programs.prototype.programNext = function() {
-  if ( this._currentProgramIndex < this._Programs.length-1 ) {
+  if ( this._currentProgramIndex < this._listPrograms.length-1 ) {
     this._currentProgramIndex++;
   }
 };
@@ -72,16 +71,30 @@ Programs.prototype.getProgramIndex = function() {
 };
 
 Programs.prototype.setProgramIndex = function(progIndex) {
-  if ( ( 0 < progIndex ) && ( progIndex < this._Programs.length-1 ) ) {
+  if ( ( 0 < progIndex ) && ( progIndex < this._listPrograms.length-1 ) ) {
     this._currentProgramIndex = progIndex;
   }
+};
+
+Programs.prototype.getListPrograms = function () {
+  return this._listPrograms;
 };
 
 //Громкость
 function Volume( maxVol ) {
   this._maxVol = Insp.checkPositiveNum( maxVol );
-  this._curVol = 1;
+  this._curVol = 0;
+  this._mute = false;
 }
+
+Volume.prototype.getCurrentVolume = function () {
+  return this._curVol;
+};
+
+Volume.prototype.getMaxVolume = function () {
+  return this._maxVol;
+};
+
 
 Volume.prototype.volumeUp = function () {
   if ( this._curVol < this._maxVol ) {
@@ -95,6 +108,17 @@ Volume.prototype.volumeDown = function () {
   }
 };
 
-Volume.prototype.volumeMute = function () {
-  this._curVol = 0;
+Volume.prototype.setVolume = function (value) {
+  if (Insp.checkNum(value)) {
+    if (( value >= 0 ) && (value <= this._maxVol)){
+      this._curVol = value;
+    }
+  }
+};
+
+Volume.prototype.mute = function (bool) {
+  if (typeof bool === "boolean") {
+    this._mute = bool;
+  }
+  return this._mute;
 };

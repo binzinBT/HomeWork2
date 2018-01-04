@@ -1,21 +1,15 @@
 "use strict";
-function Illumination( name, power, load) {
+function Illumination( name, load) {
   this._name = name;
-  this._power = power;
   this._load = load;
 }
 
+Illumination.prototype = Object.create(Power.prototype);
+Illumination.prototype.constructor = Illumination;
 
-Illumination.prototype.on = function() {
-  this._power.powerOn();
-};
 
-Illumination.prototype.off = function () {
-  this._power.powerOff();
-};
-
-Illumination.prototype.getPowerStatus = function () {
-  return this._power.getPowerStatus();
+Illumination.prototype.getName = function () {
+  return this._name;
 };
 
 Illumination.prototype.setLoad = function ( newLoad ) {

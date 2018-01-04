@@ -28,8 +28,6 @@ House.prototype.removeDevice = function (idRoom, idDevice) {
       }
       break;
     }
-    alert("i = " + i);
   }
-
 };
 

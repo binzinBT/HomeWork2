@@ -1,55 +1,46 @@
 "use strict";
-function ViewIllumination ( illumination, id, rootElement) {
+function ViewIllumination ( illumination, id, rootElementId) {
   this._illumination = illumination;
   this._id = id;
-  this._rootElement = rootElement;
+  this._rootElementId = rootElementId;
 }
 
 ViewIllumination.prototype.render = function () {
   var self = this;
   var idDevice = this._id;
-  var nameIllum = " Освещение - " + this._illumination._name;
+  var nameDevice = " Освещение - " + this._illumination.getName();
   var illumDiv = document.createElement("div");
   illumDiv.className = "device";
   illumDiv.setAttribute("id", idDevice);
-  illumDiv.innerHTML = nameIllum;
+  illumDiv.innerHTML = nameDevice;
 
-  // Power button
-  var statePowerBtn = document.createElement("button");
-  statePowerBtn.type = "button";
-  statePowerBtn.className = "btnPow";
-  statePowerBtn.innerHTML = `<img src="./img/off64.png" >`;
-  statePowerBtn.addEventListener("click", function () {
+  // func for power button from powerDivOnOff
+  function eventClickPowerBtn () {
     if (!self._illumination.getPowerStatus()){
-      self._illumination.on();
       slider.style.visibility = "visible";
       light.style.visibility = "visible";
       divBright.innerHTML = "ЯРКОСТЬ : " + self._illumination.getLoad();
-      statePowerBtn.innerHTML = `<img src="./img/on64.png" >`;
-      imgLamp.src = "./img/lampOn.png"
+      imgDev.src = "./img/lampOn.png"
     } else {
-      self._illumination.off();
       slider.style.visibility = "hidden";
       light.style.visibility = "hidden";
       divBright.innerHTML = "ВЫКЛЮЧЕНО";
-      statePowerBtn.innerHTML = `<img src="./img/off64.png" >`;
-      imgLamp.src = "./img/lampOff.png"
+      imgDev.src = "./img/lampOff.png"
     }
-  });
-  illumDiv.appendChild(statePowerBtn);
+  }
 
-  // Lamp on/off
-  var imgLamp = document.createElement("img");
-  imgLamp.setAttribute("src", "./img/lampOff.png");
-  imgLamp.setAttribute("id", "imgL"+ idDevice);
-  imgLamp.className = "imgLamp";
-  illumDiv.appendChild(imgLamp);
+  // main div power on/off
+  var statusDiv = new UnitPowerDev(this._illumination, eventClickPowerBtn);
+  illumDiv.appendChild(statusDiv);
+
+  // img Lamp on/off
+  var imgDev = imgForDevise("./img/lampOff.png");
+  statusDiv.appendChild(imgDev);
 
   // DIV for illumination load
   var divSlider = document.createElement("div");
   divSlider.className = "divSlider";
   divSlider.setAttribute("id", "dsl"+idDevice);
-  illumDiv.appendChild(divSlider);
 
   var valBright = 0;
   var divBright = document.createElement("div");
@@ -58,13 +49,13 @@ ViewIllumination.prototype.render = function () {
   divBright.innerHTML = "ВЫКЛЮЧЕНО";
   divSlider.appendChild(divBright);
 
-  // Color DIV for change illum load
+  // Color DIV for change illumination load
   var light = document.createElement("div");
   light.className = "slColor";
   light.setAttribute("id", "sl"+ idDevice);
   divSlider.appendChild(light);
 
-  // Slider illum load
+  // Slider illumination load
   var slider = document.createElement("input");
   slider.className = "sliderLoad";
   slider.type = "range";
@@ -80,27 +71,13 @@ ViewIllumination.prototype.render = function () {
     self._illumination.setLoad(valBright);
   };
   divSlider.appendChild(slider);
+  illumDiv.appendChild(divSlider);
 
-  // Button remove illumination device
-  var delDevice = document.createElement("div");
-  delDevice.className = "delIllumDiv";
-  var delDevBtn = document.createElement("a");
-  delDevBtn.type = "a";
-  delDevBtn.innerHTML = " УДАЛИТЬ УСТРОЙСТВО ";
-  delDevBtn.className = "delElem";
-  delDevBtn.addEventListener("click", function () {
-    if (confirm(`Вы действительно хотите удалить - "${nameIllum}"`)) {
-      var idRoom = ((idDevice - (idDevice % 100)) / 100);
-
-      VIEW_HOUSE._house.removeDevice(idRoom, idDevice);
-      var r =  document.getElementById(idDevice);
-      r.parentNode.removeChild(r);
-    }
-  });
-  delDevice.appendChild(delDevBtn);
+  // div Button remove illumination device
+  var delDevice = new UnitRemoveDevice(idDevice, nameDevice);
   illumDiv.appendChild(delDevice);
 
-  self._rootElement.appendChild(illumDiv);
+  document.getElementById(this._rootElementId).appendChild(illumDiv);
 };
 
 

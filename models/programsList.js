@@ -1,15 +1,4 @@
-/**
- * Created by binzin on 09.12.2017.
- */
-var breadMakerList = [
-    "Хлеб",
-    "Батон",
-    "Каравай",
-    "Рогалик",
-    "Бублик",
-    "Крендель"
-];
-
+"use strict";
 var tvProgramsList = [
   "Интер",
   "1+1",
@@ -17,7 +6,6 @@ var tvProgramsList = [
   "СТБ",
   "ШмеТБ"
 ];
-
 
 var fmStation = [
     "Хит ФМ",
@@ -27,11 +15,3 @@ var fmStation = [
     "Мото радио"
 ];
 
-var trackList = [
-    "Track 1",
-    "Track 2",
-    "Track 3",
-    "Track 4",
-    "Track 5",
-    "Track 6"
-];
