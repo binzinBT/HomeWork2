@@ -1,10 +1,10 @@
 "use strict";
 
 function Radio (name, programs, volume) {
+  Power.apply(this);
   this._name = name;
   this._programs = programs;
   this._volume = volume;
-  Power.apply(this);
 }
 // Power
 Radio.prototype = Object.create(Power.prototype);

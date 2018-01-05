@@ -1,8 +1,8 @@
 "use strict";
 function Illumination( name, load) {
+  Power.apply(this);
   this._name = name;
   this._load = load;
-  Power.apply(this);
 }
 
 Illumination.prototype = Object.create(Power.prototype);
