@@ -2,6 +2,7 @@
 function Illumination( name, load) {
   this._name = name;
   this._load = load;
+  Power.apply(this);
 }
 
 Illumination.prototype = Object.create(Power.prototype);

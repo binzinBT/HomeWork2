@@ -4,6 +4,7 @@ function Tv (name, programs, volume) {
   this._name = name;
   this._programs = programs;
   this._volume = volume;
+  Power.apply(this);
 }
 // Power
 Tv.prototype = Object.create(Power.prototype);
